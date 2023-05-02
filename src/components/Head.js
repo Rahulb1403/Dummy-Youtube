@@ -27,6 +27,7 @@ const Head = () => {
   }, [searchQuery])
 
   const getSuggestion = async () => {
+    console.log("Search api")
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery)
     const json = await data.json()
     setSuggestion(json[1])
@@ -65,21 +66,23 @@ const Head = () => {
         </Link>
       </div>
       <div className="col-span-10 px-10">
-        <div onFocus={() => setShowSuggestion(true)}>
+        <div>
           <input
             className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-
+            onFocus={() => setShowSuggestion(true)}
             // onBlur={() => setShowSuggestion(false)}
           />
-          <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
-            🔍
-          </button>
+          <Link to={searchQuery && "/result?search_query=" + searchQuery}>
+            <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
+              🔍
+            </button>
+          </Link>
         </div>
         {showSuggestion && (
-          <div className="absolute bg-white py-2 px-3 w-1/3 shadow-lg rounded-lg broder border-gray-100">
+          <div className="absolute bg-white py-2 px-3 w-1/3 shadow-lg rounded-lg broder border-gray-100 z-10">
             <ul>
               {suggestion.map((suggest) => (
                 <Link key={suggest} to={"/result?search_query=" + suggest}>
