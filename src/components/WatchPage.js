@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { clearToggle } from "../utils/appSlice"
 import { useSearchParams } from "react-router-dom"
 import SuggestVideo from "./SuggestVideo"
 import { YOUTUBE_VIDEO_API_BY_ID } from "../utils/constant"
 import CommentContainer from "./CommentContainer"
+import LiveChat from "./LiveChat"
+import { resetMessages } from "../utils/chatSlice"
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams()
   const [videoDetail, setVideoDetail] = useState()
   const parameters = searchParams.get("v")
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen)
 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(clearToggle())
+    dispatch(resetMessages())
     getVideoById()
   }, [searchParams])
 
@@ -32,7 +36,9 @@ const WatchPage = () => {
     <div className="grid grid-cols-12">
       <div className="col-span-9 px-5">
         <iframe
-          // className="w-full h-[600px] col-span-7"
+          // className="w-full h-[600px] col-span-9"
+
+          className={isMenuOpen ? "w-[1120px]" : ""}
           height="600"
           width="1220"
           src={"https://www.youtube.com/embed/" + parameters}
@@ -52,6 +58,9 @@ const WatchPage = () => {
         </div>
       </div>
       <div className="col-span-3 mr-2">
+        <div>
+          <LiveChat />
+        </div>
         <p className="px-5 py-2 m-2 bg-gray-800 text-white rounded-lg text-center">
           Related Videos
         </p>

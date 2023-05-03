@@ -48,24 +48,24 @@ const Head = () => {
   }
 
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg">
+    <div className="grid grid-flow-col px-2 pt-2 pb-4 m-2 shadow-lg items-center">
       <div className="flex col-span-1">
         <img
           onClick={toggleHandler}
-          className="h-8"
+          className="h-8 px-4"
           alt="menu"
           src="https://cdn-icons-png.flaticon.com/512/3917/3917215.png"
         />
         <Link to="/">
           <img
             onClick={sidebarHandler}
-            className="h-8 mx-2"
+            className="h-8 ml-5"
             alt="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
           />
         </Link>
       </div>
-      <div className="col-span-10 px-10">
+      <div className="col-span-10 px-10 items-center">
         <div>
           <input
             className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
@@ -77,6 +77,7 @@ const Head = () => {
           />
           <Link to={searchQuery && "/result?search_query=" + searchQuery}>
             <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
+              {/* <img src="https://img.icons8.com/ios/50/null/search--v5.png" /> */}
               🔍
             </button>
           </Link>
