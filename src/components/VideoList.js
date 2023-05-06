@@ -24,11 +24,8 @@ const VideoList = ({ info }) => {
         <span className="px-3">
           <TimeAgo date={publishedAt} />
         </span>
-        <div className="flex mx-2 my-2">
-          {/* <img
-            className="h-9 w-9 rounded-full"
-            src={channeldetails?.thumbnails?.default?.url}
-          /> */}
+        <div className="flex mx-2 my-2 items-center">
+          <img className="h-9 w-9 rounded-full" src={thumbnails.medium.url} />
           <p className=" px-3 py-2 font-bold ">{channelTitle} </p>
         </div>
         <p className="px-3 py-2">{description}</p>

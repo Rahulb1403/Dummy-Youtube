@@ -7,12 +7,13 @@ import { YOUTUBE_VIDEO_API_BY_ID } from "../utils/constant"
 import CommentContainer from "./CommentContainer"
 import LiveChat from "./LiveChat"
 import { resetMessages } from "../utils/chatSlice"
+import VideoDetail from "./VideoDetail"
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams()
   const [videoDetail, setVideoDetail] = useState()
   const parameters = searchParams.get("v")
-  const isMenuOpen = useSelector((store) => store.app.isMenuOpen)
+  // const isMenuOpen = useSelector((store) => store.app.isMenuOpen)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -26,7 +27,7 @@ const WatchPage = () => {
     const data = await fetch(YOUTUBE_VIDEO_API_BY_ID + parameters)
     const json = await data.json()
     setVideoDetail(json.items[0])
-    // console.log("video details", json.items[0])
+    console.log("video details", json.items[0])
   }
 
   if (!videoDetail) {
@@ -36,9 +37,7 @@ const WatchPage = () => {
     <div className="grid grid-cols-12">
       <div className="col-span-9 px-5">
         <iframe
-          // className="w-full h-[600px] col-span-9"
-
-          className={isMenuOpen ? "w-[1120px]" : ""}
+          className="w-full"
           height="600"
           width="1220"
           src={"https://www.youtube.com/embed/" + parameters}
@@ -53,6 +52,9 @@ const WatchPage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
+        <div>
+          <VideoDetail detail={videoDetail} />
+        </div>
         <div>
           <CommentContainer />
         </div>

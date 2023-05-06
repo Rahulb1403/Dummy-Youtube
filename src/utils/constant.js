@@ -5,18 +5,14 @@ const API_KEY = "AIzaSyBf3SNCgulGDba_iT8NcDqR7Zy84pvlxrs"
 export const LIVE_CHAT_COUNT = 25
 
 export const YOUTUBE_VIDEOS_API =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&relevanceLanguage=hi&maxResults=40&regionCode=IN&key=" +
   API_KEY
 
 export const YOUTUBE_SEARCH_API =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
 
-export const YOUTUBE_SEARCH_RESULT_API =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=" +
-  API_KEY
-
 export const YOUTUBE_SEARCH_VIDEO_API =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=" +
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&key=" +
   API_KEY +
   "&q="
 
@@ -69,15 +65,47 @@ export const buttons = [
     videoCategoryId: "2",
   },
   {
-    name: "Film & Animation",
+    name: "Film",
     videoCategoryId: "1",
   },
   {
-    name: "People & Blogs",
+    name: "Blogs",
     videoCategoryId: "22",
   },
   {
-    name: "Pets & Animals",
+    name: "Animals",
+    videoCategoryId: "15",
+  },
+  {
+    name: "Science",
+    videoCategoryId: "28",
+  },
+  {
+    name: "News",
+    videoCategoryId: "25",
+  },
+  {
+    name: "Entertainment",
+    videoCategoryId: "24",
+  },
+  {
+    name: "Comedy",
+    videoCategoryId: "23",
+  },
+  {
+    name: "Cars",
+    videoCategoryId: "2",
+  },
+  {
+    name: "Film",
+    videoCategoryId: "1",
+  },
+  {
+    name: "Blogs",
+    videoCategoryId: "22",
+  },
+  {
+    name: "Animals",
     videoCategoryId: "15",
   },
   {

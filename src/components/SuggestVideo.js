@@ -18,6 +18,7 @@ const SuggestVideo = ({ detail }) => {
     const data = await fetch(YOUTUBE_SEARCH_VIDEO_API + vidName)
     const json = await data.json()
     setRelatedVideo(json?.items)
+    // console.log(json?.items)
   }
 
   if (!relatedVideo) {

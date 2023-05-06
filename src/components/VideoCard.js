@@ -7,7 +7,7 @@ const VideoCard = ({ info }) => {
 
   const timing = duration.replace(/P|T|S/g, "").replace(/H|M/g, ":")
   return (
-    <div className="p-2 m-2 w-72 shadow-lg">
+    <div className="p-2 m-2 w-64 shadow-lg">
       <div className="relative">
         <img
           className="rounded-xl"
@@ -21,7 +21,10 @@ const VideoCard = ({ info }) => {
       <p className="text-base font-medium py-2">
         {title.length > 50 ? title.substring(0, 50) + "..." : title}
       </p>
-      <p className="text-s font-semibold">{channelTitle}</p>
+      <div className="flex items-center pb-2">
+        <img className="h-7 w-7 rounded-full" src={thumbnails.medium.url} />
+        <p className="text-s px-2 font-semibold">{channelTitle}</p>
+      </div>
       <p>
         {Intl.NumberFormat("en", { notation: "compact" }).format(
           statistics.viewCount

@@ -15,16 +15,13 @@ const SuggestVideoCard = ({ info }) => {
       </div>
 
       <div className="col-span-5">
-        <p className="text-base font-medium mb-2 line-clamp-2">{title}</p>
+        <p className="text-base font-medium mb-1 line-clamp-2">{title}</p>
         <span className="text-xs font-semibold">
           <TimeAgo date={publishedAt} />
         </span>
-        <div className="flex mx-2 my-2">
-          {/* <img
-            className="h-9 w-9 rounded-full"
-            src={channeldetails?.thumbnails?.default?.url}
-          /> */}
-          <p className="text-xs font-semibold">{channelTitle} </p>
+        <div className="flex items-center pt-2">
+          <img className="h-6 w-6 rounded-full" src={thumbnails.medium.url} />
+          <p className="text-xs px-2 font-semibold">{channelTitle} </p>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { SideBarTags } from "../utils/helper"
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen)
@@ -10,29 +11,23 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="p-5 shadow-lg w-48">
+    <div className="p-2 w-52 shadow-lg">
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>Shorts</li>
-        <li>Videos</li>
-        <li>Live</li>
-      </ul>
-      <h1 className="font-bold pt-5">Subscriptions</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movie</li>
-      </ul>
-
-      <h1 className="font-bold pt-5">Watch Later</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movie</li>
+        {SideBarTags.map((tag, i) => (
+          <li
+            className={
+              tag.name === "Home"
+                ? "bg-gray-200 font-bold rounded-md px-5 my-1"
+                : "hover:bg-gray-200 rounded-md px-5 my-1"
+            }
+            key={i}
+          >
+            <Link to="/" className="flex py-4">
+              <span>{tag.svg}</span>
+              <span className="px-4">{tag.name}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   )

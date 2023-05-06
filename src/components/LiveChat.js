@@ -13,7 +13,7 @@ const LiveChat = () => {
       dispatch(
         addMessages({
           name: generateRandomName(),
-          message: makeRandomMessage(20),
+          message: makeRandomMessage(),
         })
       )
     }, 1500)
@@ -23,21 +23,21 @@ const LiveChat = () => {
 
   return (
     <>
-      <div className="font-bold w-full p-3 pl-5 border border-black bg-slate-100 rounded-lg rounded-b-none">
+      <div className="font-bold w-full p-3 pl-5 border-2 border-gray-200 rounded-lg rounded-b-none">
         Live Chat
       </div>
-      <div className="border border-y-0 border-black bg-slate-100 h-[500px] p-3 overflow-y-scroll flex flex-col-reverse">
+      <div className="border-2 border-y-0 border-gray-200 h-[495px] p-3 overflow-y-scroll flex flex-col-reverse">
         {chatMessage.map((c, i) => (
           <ChatMessage key={i} name={c.name} message={c.message} />
         ))}
       </div>
       <form
-        className="w-full p-2 pl-4 border border-t-0 border-black bg-slate-100 rounded-lg rounded-t-none"
+        className="w-full p-2 pl-4 border-2 border-gray-200 rounded-lg rounded-t-none"
         onSubmit={(e) => {
           e.preventDefault()
           dispatch(
             addMessages({
-              name: "Rahul Bansal",
+              name: "Rahul",
               message: liveMessage,
             })
           )
