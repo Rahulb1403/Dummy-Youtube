@@ -1,16 +1,42 @@
 import React, { useState } from "react"
 import TimeAgo from "react-timeago"
 import Linkify from "react-linkify"
-import { YouTube_LikedVideo } from "../utils/helper"
+import {
+  YOUTUBE_CLIP,
+  YOUTUBE_MORE,
+  YOUTUBE_SAVE,
+  YOUTUBE_SHARE,
+  YouTube_LikedVideo,
+  YouTube_LikedVideoBlack,
+} from "../utils/helper"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  SaveRecord,
+  Subscribe,
+  UnSaveRecord,
+  UnSubscribe,
+  liked,
+  Unliked,
+  history,
+} from "../utils/recordSlice"
 
-const VideoDetail = ({ detail }) => {
+const VideoDetail = ({ detail, channel }) => {
+  // const [channelDetail, setChannelDetail] = useState()
+  // console.log("Channel ", channel)
   const [show, setShow] = useState(false)
-  const [subscribe, setSubscribe] = useState(false)
-  const [save, setSave] = useState(false)
+  // const [subscribe, setSubscribe] = useState(false)
+  // const [save, setSave] = useState(false)
+
+  const dispatch = useDispatch()
+  dispatch(history({ [detail.id]: detail }))
+  const saved = useSelector((store) => store.record.saved)
+  const subscribe = useSelector((store) => store.record.subscribe)
+  const like = useSelector((store) => store.record.like)
 
   const { snippet, statistics } = detail
   const { channelTitle, description, publishedAt, title } = snippet
   const { likeCount, viewCount, commentCount } = statistics
+
   return (
     <div className="py-3">
       <h1 className="text-xl font-semibold">{title}</h1>
@@ -19,48 +45,90 @@ const VideoDetail = ({ detail }) => {
           <img
             className="h-12 rounded-full p-1"
             alt="channele_logo"
-            src="https://yt3.ggpht.com/Oazw11tnwSahAg-Cvyttvs-Uee--0zrvCtKNWlmFAbPonkANkagjU7BlV9fA_mnlJvjLcD6cKw=s88-c-k-c0x00ffffff-no-rj"
+            src={channel?.snippet?.thumbnails?.default?.url}
           />
           <div>
             <h1 className="flex pl-2 font-semibold">{channelTitle}</h1>
             <h1 className="text-xs pl-2 font-medium text-slate-500">
-              100K subscribers
+              {Intl.NumberFormat("en", {
+                notation: "compact",
+                maximumSignificantDigits: 3,
+              }).format(channel?.statistics?.subscriberCount)}{" "}
+              subscribers
             </h1>
           </div>
           <button
             className={
-              subscribe
+              channel?.id in subscribe
                 ? "p-1 px-4 ml-7 h-10 bg-zinc-200 rounded-full font-semibold text-base"
                 : "p-1 px-4 ml-7 h-10 bg-black hover:bg-gray-800 rounded-full font-semibold text-white text-base"
             }
-            onClick={() => setSubscribe(!subscribe)}
+            onClick={() => {
+              if (!(channel?.id in subscribe)) {
+                dispatch(Subscribe({ [channel.id]: channel }))
+              } else {
+                dispatch(UnSubscribe(channel.id))
+              }
+            }}
           >
-            {subscribe ? "Subscribed" : "Subscribe"}
+            {channel.id in subscribe ? "Subscribed" : "Subscribe"}
           </button>
         </div>
         <div className="flex">
-          <button className="p-1 px-4 ml-5 h-10 bg-zinc-200 hover:bg-zinc-300 rounded-full font-semibold text-base">
-            {YouTube_LikedVideo}
-            {Intl.NumberFormat("en", { notation: "compact" }).format(likeCount)}
+          <button
+            className="p-1 px-4  h-10  bg-zinc-200 hover:bg-zinc-300 rounded-full font-semibold text-base"
+            onClick={() => {
+              if (!(detail.id in like)) {
+                dispatch(liked({ [detail.id]: detail }))
+              } else {
+                dispatch(Unliked(detail.id))
+              }
+            }}
+          >
+            <span className="flex">
+              {detail.id in like ? YouTube_LikedVideoBlack : YouTube_LikedVideo}
+              <span className="ml-2">
+                {Intl.NumberFormat("en", { notation: "compact" }).format(
+                  likeCount
+                )}
+              </span>
+            </span>
           </button>
 
-          <button className="p-1 px-4 ml-5 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
-            Share
+          <button className="p-1 px-4 ml-2 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
+            <span className="flex">
+              {YOUTUBE_SHARE}
+              <span className="ml-2">Share</span>
+            </span>
           </button>
 
-          <button className="p-1 px-4 ml-5 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
-            Clip
+          <button className="p-1 px-4 ml-2 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
+            <span className="flex">
+              {YOUTUBE_CLIP}
+              <span className="ml-2">Clip</span>
+            </span>
           </button>
 
           <button
-            className="p-1 px-4 ml-5 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base"
-            onClick={() => setSave(!save)}
+            className="p-1 px-4 ml-2 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base"
+            onClick={() => {
+              if (!(detail.id in saved)) {
+                dispatch(SaveRecord({ [detail.id]: detail }))
+              } else {
+                dispatch(UnSaveRecord(detail.id))
+              }
+            }}
           >
-            {save ? "Saved" : "Save"}
+            <span className="flex">
+              {YOUTUBE_SAVE}
+              <span className="ml-2">
+                {detail.id in saved ? "Saved" : "Save"}
+              </span>
+            </span>
           </button>
 
-          <button className="p-4 ml-5 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
-            ...
+          <button className="p-1 px-2 ml-2 h-10 bg-zinc-200 hover:bg-zinc-300  rounded-full font-semibold text-base">
+            <span className="flex items-center">{YOUTUBE_MORE}</span>
           </button>
         </div>
       </div>
@@ -103,7 +171,7 @@ const VideoDetail = ({ detail }) => {
         </Linkify>
       </div>
       <div className="pt-3 px-2 font-normal text-xl">
-        {commentCount} Comments
+        {Intl.NumberFormat().format(commentCount)} Comments
       </div>
     </div>
   )

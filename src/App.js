@@ -6,6 +6,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import MainContainer from "./components/MainContainer"
 import WatchPage from "./components/WatchPage.js"
 import SearchVideo from "./components/SearchVideo"
+import History from "./components/History.js"
+import LikeVideos from "./components/LikedVideos"
+import Subscribe from "./components/Subscribe"
+import SavedVideos from "./components/SavedVideos"
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +27,22 @@ const appRouter = createBrowserRouter([
       {
         path: "result",
         element: <SearchVideo />,
+      },
+      {
+        path: "subscribe",
+        element: <Subscribe />,
+      },
+      {
+        path: "history",
+        element: <History />,
+      },
+      {
+        path: "saved",
+        element: <SavedVideos />,
+      },
+      {
+        path: "likedVideos",
+        element: <LikeVideos />,
       },
     ],
   },

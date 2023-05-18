@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { clearToggle } from "../utils/appSlice"
 import { useSearchParams } from "react-router-dom"
 import SuggestVideo from "./SuggestVideo"
-import { YOUTUBE_VIDEO_API_BY_ID } from "../utils/constant"
+import { YOUTUBE_CHANNEL_API, YOUTUBE_VIDEO_API_BY_ID } from "../utils/constant"
 import CommentContainer from "./CommentContainer"
 import LiveChat from "./LiveChat"
 import { resetMessages } from "../utils/chatSlice"
@@ -12,6 +12,8 @@ import VideoDetail from "./VideoDetail"
 const WatchPage = () => {
   const [searchParams] = useSearchParams()
   const [videoDetail, setVideoDetail] = useState()
+  const [channelDetail, setChannelDetail] = useState()
+
   const parameters = searchParams.get("v")
   // const isMenuOpen = useSelector((store) => store.app.isMenuOpen)
 
@@ -24,15 +26,29 @@ const WatchPage = () => {
 
   const getVideoById = async () => {
     console.log("Video By Id API call")
+    console.log("Channel API call")
+
     const data = await fetch(YOUTUBE_VIDEO_API_BY_ID + parameters)
     const json = await data.json()
     setVideoDetail(json.items[0])
-    console.log("video details", json.items[0])
+    // console.log("video details", json.items[0])
+
+    const data1 = await fetch(
+      YOUTUBE_CHANNEL_API + json.items[0]?.snippet?.channelId
+    )
+    const json1 = await data1.json()
+    setChannelDetail(json1.items[0])
+    // console.log("Channel details", json1?.items[0])
   }
 
   if (!videoDetail) {
     return null
   }
+
+  if (!channelDetail) {
+    return null
+  }
+
   return (
     <div className="grid grid-cols-12">
       <div className="col-span-9 px-5">
@@ -53,7 +69,7 @@ const WatchPage = () => {
           allowFullScreen
         ></iframe>
         <div>
-          <VideoDetail detail={videoDetail} />
+          <VideoDetail detail={videoDetail} channel={channelDetail} />
         </div>
         <div>
           <CommentContainer />

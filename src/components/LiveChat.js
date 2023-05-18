@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addMessages } from "../utils/chatSlice"
 import ChatMessage from "./ChatMessage"
-import { generateRandomName, makeRandomMessage } from "../utils/helper"
+import {
+  YOUTUBE_SEND,
+  generateRandomName,
+  makeRandomMessage,
+} from "../utils/helper"
 
 const LiveChat = () => {
   const [liveMessage, setLiveMessage] = useState("")
@@ -32,7 +36,7 @@ const LiveChat = () => {
         ))}
       </div>
       <form
-        className="w-full p-2 pl-4 border-2 border-gray-200 rounded-lg rounded-t-none"
+        className="w-full p-2 pl-4 border-2 border-gray-200 rounded-lg rounded-t-none flex flex-wrap"
         onSubmit={(e) => {
           e.preventDefault()
           dispatch(
@@ -45,14 +49,15 @@ const LiveChat = () => {
         }}
       >
         <input
-          className="p-1 w-[280px] rounded-md border border-black"
+          className="p-1 w-10/12 rounded-md border border-black"
           type="text"
           value={liveMessage}
           onChange={(e) => {
             setLiveMessage(e.target.value)
           }}
+          required
         />
-        <button className="px-2 py-1 mx-2 bg-green-200 rounded-md">Send</button>
+        <button className="w-1/12 mx-2">{YOUTUBE_SEND}</button>
       </form>
     </>
   )

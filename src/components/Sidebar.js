@@ -22,7 +22,7 @@ const Sidebar = () => {
             }
             key={i}
           >
-            <Link to="/" className="flex py-4">
+            <Link to={tag.link} className="flex py-4">
               <span>{tag.svg}</span>
               <span className="px-4">{tag.name}</span>
             </Link>
