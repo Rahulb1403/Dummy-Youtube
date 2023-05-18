@@ -1,7 +1,5 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import VideoCard from "./VideoCard"
-import { Link } from "react-router-dom"
 
 const Subscribe = () => {
   const subscribe = useSelector((store) => store.record.subscribe)
@@ -32,7 +30,7 @@ const Subscribe = () => {
           </div>
         ))
       ) : (
-        <p className="p-3 m-4 text-2xl">No subscribed Channel Available</p>
+        <p className="p-3 m-4 text-2xl">No Subscribed Channel Available</p>
       )}
     </div>
   )

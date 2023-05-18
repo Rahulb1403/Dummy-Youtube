@@ -1,11 +1,9 @@
-// const API_KEY = "AIzaSyC0x9xKA6I34_3QKfSjcWx_5UXce4tcRxk"
-
-const API_KEY = "AIzaSyBf3SNCgulGDba_iT8NcDqR7Zy84pvlxrs"
+const API_KEY = process.env.REACT_APP_API_KEY2
 
 export const LIVE_CHAT_COUNT = 25
 
 export const YOUTUBE_VIDEOS_API =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&relevanceLanguage=hi&maxResults=40&regionCode=IN&key=" +
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&relevanceLanguage=hi&maxResults=30&regionCode=IN&key=" +
   API_KEY
 
 export const YOUTUBE_SEARCH_API =
@@ -103,13 +101,5 @@ export const buttons = [
   {
     name: "Blogs",
     videoCategoryId: "22",
-  },
-  {
-    name: "Animals",
-    videoCategoryId: "15",
-  },
-  {
-    name: "Science",
-    videoCategoryId: "28",
   },
 ]

@@ -14,7 +14,7 @@ const LikeVideos = () => {
           </Link>
         ))
       ) : (
-        <p className="p-3 m-4 text-2xl">No liked Video Available</p>
+        <p className="p-3 m-4 text-2xl">No Liked Video Available</p>
       )}
     </div>
   )

@@ -27,32 +27,23 @@ const SearchVideo = () => {
     const data = await fetch(YOUTUBE_SEARCH_VIDEO_API + query)
     const json = await data.json()
     setSearchVideos(json.items)
-    console.log("Search Api", json)
+    // console.log("Search Api", json)
   }
-
-  // const [channeldetails, setChanneldetails] = useState([])
-  // useEffect(() => {
-  //   getChannelDetails()
-  // }, [])
-
-  // const getChannelDetails = async () => {
-  //   console.log("Channel API call")
-  //   const data = await fetch(YOUTUBE_CHANNEL_API + "UCarJoVXH0T2pdtcHBu9J8Bw")
-  //   const json = await data.json()
-  //   setChanneldetails(json.items[0].snippet)
-  //   console.log("Channel Api", json)
-  // }
 
   if (searchVideos?.length === 0) {
     return null
   }
   return (
     <div>
-      {searchVideos.map((video, i) => (
-        <Link to={"/watch?v=" + video.id.videoId} key={i}>
-          <VideoList info={video} />
-        </Link>
-      ))}
+      {searchVideos.map((video, i) => {
+        return (
+          video.id.videoId && (
+            <Link to={"/watch?v=" + video.id.videoId} key={i}>
+              <VideoList info={video} />
+            </Link>
+          )
+        )
+      })}
     </div>
   )
 }

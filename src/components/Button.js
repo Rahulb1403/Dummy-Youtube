@@ -7,7 +7,7 @@ const Button = ({ name, videoId }) => {
   return (
     <div>
       <button
-        className="px-5 py-2 m-2 bg-gray-200 rounded-lg hover:bg-black hover:text-white"
+        className="px-5 py-2 my-2 mx-1 bg-gray-200 rounded-lg hover:bg-black hover:text-white"
         onClick={() => {
           dispatch(changeCategory(videoId))
         }}

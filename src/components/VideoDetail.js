@@ -21,11 +21,7 @@ import {
 } from "../utils/recordSlice"
 
 const VideoDetail = ({ detail, channel }) => {
-  // const [channelDetail, setChannelDetail] = useState()
-  // console.log("Channel ", channel)
   const [show, setShow] = useState(false)
-  // const [subscribe, setSubscribe] = useState(false)
-  // const [save, setSave] = useState(false)
 
   const dispatch = useDispatch()
   dispatch(history({ [detail.id]: detail }))
