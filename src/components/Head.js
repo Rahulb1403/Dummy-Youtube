@@ -48,7 +48,7 @@ const Head = () => {
   }
 
   return (
-    <div className="grid grid-flow-col px-2 pt-2 pb-4 mx-2 my-1 shadow-md items-center">
+    <div className="grid grid-flow-col px-2 pt-2 pb-4 w-full mx-2 my-1 shadow-md items-center">
       <div className="flex col-span-1">
         <img
           onClick={toggleHandler}
@@ -59,7 +59,7 @@ const Head = () => {
         <Link to="/">
           <img
             onClick={sidebarHandler}
-            className="h-8 ml-2"
+            className="h-8 px-2"
             alt="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
           />

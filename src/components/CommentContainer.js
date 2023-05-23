@@ -66,7 +66,7 @@ const commentsData = [
 const Comment = ({ data }) => {
   const { name, text, replies } = data
   return (
-    <div className="flex p-2 rounded-lg my-2">
+    <div className="flex p-2 rounded-lg">
       <img
         className="w-12 h-12"
         alt="user"
@@ -84,7 +84,7 @@ const CommentsList = ({ comments }) => {
   return comments.map((comment, i) => (
     <div key={i}>
       <Comment data={comment} />
-      <div className="pl-5S  ml-12">
+      <div className="pl-5  ml-12">
         <CommentsList comments={comment.replies} />
       </div>
     </div>
@@ -93,7 +93,7 @@ const CommentsList = ({ comments }) => {
 
 const CommentContainer = () => {
   return (
-    <div className="px-2 border">
+    <div className="px-2">
       {/* <h1 className="text-2xl font-bold">Comment:</h1> */}
       <CommentsList comments={commentsData} />
     </div>

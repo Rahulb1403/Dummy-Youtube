@@ -36,7 +36,7 @@ const VideoDetail = ({ detail, channel }) => {
   return (
     <div className="py-3">
       <h1 className="text-xl font-semibold">{title}</h1>
-      <div className="flex py-3 justify-between">
+      <div className="flex flex-wrap py-3 justify-between">
         <div className="flex">
           <img
             className="h-12 rounded-full p-1"
