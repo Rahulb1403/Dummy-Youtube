@@ -49,7 +49,8 @@ const LiveChat = () => {
         }}
       >
         <input
-          className="p-1 w-10/12 rounded-md border border-black"
+          className="p-1 pl-3 w-10/12 rounded-full border border-gray-300"
+          placeholder="Say something..."
           type="text"
           value={liveMessage}
           onChange={(e) => {
