@@ -4,11 +4,13 @@ import { OpenMenu, toggleMenu } from "../utils/appSlice"
 import { Link } from "react-router-dom"
 import { YOUTUBE_SEARCH_API } from "../utils/constant"
 import { cacheResults } from "../utils/searchSlice"
+import { YOUTUBE_SEARCH_ICON } from "../utils/helper"
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [suggestion, setSuggestion] = useState([])
   const [showSuggestion, setShowSuggestion] = useState(false)
+  const [showIcon, setShowIcon] = useState(false)
 
   const SearchCache = useSelector((store) => store.search)
   const dispatch = useDispatch()
@@ -68,22 +70,30 @@ const Head = () => {
 
       <div className="col-span-10 px-10 items-center">
         <div className="flex flex-wrap">
+          {showIcon && (
+            <span className="py-2 absolute pl-3">{YOUTUBE_SEARCH_ICON}</span>
+          )}
           <input
-            className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
+            className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full focus:pl-[50px]"
             type="text"
             value={searchQuery}
+            placeholder="Search"
             onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSuggestion(true)}
-            // onBlur={() => setShowSuggestion(false)}
+            onFocus={() => {
+              setShowSuggestion(true)
+              setShowIcon(true)
+            }}
+            onBlur={() => {
+              setShowIcon(false)
+              // setShowSuggestion(false)
+            }}
           />
           <Link to={searchQuery && "/result?search_query=" + searchQuery}>
             <button
               className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100"
               onClick={() => setShowSuggestion(false)}
             >
-              <svg viewBox="0 0 50 50" width="25px" height="25px">
-                <path d="M 21 3 C 11.622998 3 4 10.623005 4 20 C 4 29.376995 11.622998 37 21 37 C 24.712383 37 28.139151 35.791079 30.9375 33.765625 L 44.085938 46.914062 L 46.914062 44.085938 L 33.886719 31.058594 C 36.443536 28.083 38 24.223631 38 20 C 38 10.623005 30.377002 3 21 3 z M 21 5 C 29.296122 5 36 11.703883 36 20 C 36 28.296117 29.296122 35 21 35 C 12.703878 35 6 28.296117 6 20 C 6 11.703883 12.703878 5 21 5 z" />
-              </svg>
+              {YOUTUBE_SEARCH_ICON}
             </button>
           </Link>
         </div>
@@ -95,12 +105,13 @@ const Head = () => {
                 <Link key={suggest} to={"/result?search_query=" + suggest}>
                   <li
                     key={suggest}
-                    className="py-1 px-3 hover:bg-gray-100 rounded-md"
+                    className="py-1 px-1 hover:bg-gray-100 rounded-md flex"
                     onClick={() => {
                       setSearchQuery(suggest)
                       setShowSuggestion(false)
                     }}
                   >
+                    <span className="pr-3">{YOUTUBE_SEARCH_ICON}</span>
                     {suggest}
                   </li>
                 </Link>
